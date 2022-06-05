@@ -25,6 +25,7 @@ Para este projeto utilizamos migration para versionamento da base de dados, cria
 4. Rode o docker utilizando o comando a seguir:
 
     `make run-docker-postgres`
+    
 Caso na execução ocorra o erro abaixo, siga as instruções abaixo:
 
         /usr/local/bin/docker-entrypoint.sh: /docker-entrypoint-initdb.d/init-database.sh: /bin/bash: bad interpreter: Permission denied
