@@ -37,7 +37,7 @@ Caso na execução ocorra o erro abaixo, siga as instruções abaixo:
     
     `cd db/migrations/postgres`
 
-    `chmod +x init-database.sh`
+    `chmod +x automation-database.sh`
 
     `docker-compose up postgres`
 
