@@ -1,4 +1,4 @@
-package entity
+package entidade
 
 import (
 	"github.com/google/uuid"
@@ -7,5 +7,5 @@ import (
 type Sensor struct {
 	ID 				uuid.UUID
 	Nome            string
-	Localidade 	Localidade        
+
 }

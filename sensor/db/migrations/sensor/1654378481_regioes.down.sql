@@ -1,6 +1,0 @@
-
-BEGIN;
-
-	DROP TABLE regioes;
-
-COMMIT;
