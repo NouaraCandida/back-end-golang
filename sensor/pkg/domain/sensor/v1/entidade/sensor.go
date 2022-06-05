@@ -9,4 +9,4 @@ type Evento struct {
 	Valor           	string
 	IDSensor 			uuid.UUID
 
-}
+} 
