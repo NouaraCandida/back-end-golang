@@ -1,7 +1,7 @@
 # Sensor
 
 ## Criação do projeto
-Para gerenciar os pacotes com mais flexibilidade o golang 1.13> possibilita criar  você criará seu próprio módulo Go público e adicionará um pacote ao seu novo módulo.Para informações detalhadas acesso o [link](https://www.digitalocean.com/community/tutorials/how-to-use-go-modules). Para este projeto nosso módulo chamará sensor.
+Para gerenciar os pacotes com mais flexibilidade o golang 1.13> possibilita que você crie seu próprio módulo Go onde adicionará os pacote ao seu novo módulo.Para informações detalhadas acesso o [link](https://www.digitalocean.com/community/tutorials/how-to-use-go-modules). Para este projeto nosso módulo chamará sensor.
 
 `go mod init sensor`
 
