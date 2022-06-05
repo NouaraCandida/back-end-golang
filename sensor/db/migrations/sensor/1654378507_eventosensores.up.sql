@@ -1,11 +1,11 @@
 BEGIN;
 
 	CREATE TABLE eventos_sensores(
-		id					UUID	NOT NULL,
-		id_sensor			UUID	NOT NULL,
-		valor				CITEXT			,
-		created_at 		timestamptz NOT NULL DEFAULT NOW(),
-		updated_at 		timestamptz,
+		id					UUID			NOT NULL,
+		id_sensor			UUID			NOT NULL,
+		valor				CITEXT,
+		created_at 							TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+		updated_at 							TIMESTAMPTZ,
 
 		CONSTRAINT		 eventos_sensores_pk
 		PRIMARY KEY		 (id),

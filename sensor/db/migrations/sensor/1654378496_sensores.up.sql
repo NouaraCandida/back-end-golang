@@ -4,8 +4,8 @@ BEGIN;
 		id				UUID	NOT NULL,
 		nome			CITEXT	NOT NULL,
 		id_localidade   UUID    NOT NULL,
-		created_at 		timestamptz NOT NULL DEFAULT NOW(),
-		updated_at 		timestamptz,
+		created_at 		TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+		updated_at 		TIMESTAMPTZ,
 
 		CONSTRAINT		sensores_pk
 		PRIMARY KEY		(id),
@@ -16,7 +16,7 @@ BEGIN;
 		REFERENCES	     localidades
 	);
 
-	
+
 
 	insert into sensores(id,nome, id_localidade) values('988fff3e-9458-4880-80fa-a3104c43dcba','sensor001','4ac94fd2-0517-4dc7-99c9-644f719e955b');
 	insert into sensores(id,nome, id_localidade)  values('0cc22945-6805-44cc-9c38-50675245c1aa','sensor002','4ac94fd2-0517-4dc7-99c9-644f719e955b');
