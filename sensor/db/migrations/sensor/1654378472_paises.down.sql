@@ -1,0 +1,6 @@
+
+BEGIN;
+
+	DROP TABLE paises;
+
+COMMIT;
