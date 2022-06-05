@@ -1,7 +1,7 @@
 # Sensor
 
 ## Criação do projeto
-Para gerenciar os pacotes com mais flexibilidade o golang 1.13> possibilita que você crie seu próprio módulo Go onde adicionará os pacote ao seu novo módulo.Para informações detalhadas acesso o [link](https://www.digitalocean.com/community/tutorials/how-to-use-go-modules). Para este projeto nosso módulo chamará sensor.
+Para gerenciar os pacotes com mais flexibilidade o golang 1.13> possibilita criar  você criará seu próprio módulo Go público e adicionará um pacote ao seu novo módulo.Para informações detalhadas acesso o [link](https://www.digitalocean.com/community/tutorials/how-to-use-go-modules). Para este projeto nosso módulo chamará sensor.
 
 `go mod init sensor`
 
@@ -25,7 +25,6 @@ Para este projeto utilizamos migration para versionamento da base de dados, cria
 4. Rode o docker utilizando o comando a seguir:
 
     `make run-docker-postgres`
-    
 Caso na execução ocorra o erro abaixo, siga as instruções abaixo:
 
         /usr/local/bin/docker-entrypoint.sh: /docker-entrypoint-initdb.d/init-database.sh: /bin/bash: bad interpreter: Permission denied
@@ -38,7 +37,7 @@ Caso na execução ocorra o erro abaixo, siga as instruções abaixo:
     
     `cd db/migrations/postgres`
 
-    `chmod +x init-database.sh`
+    `chmod +x automation-database.sh`
 
     `docker-compose up postgres`
 
@@ -49,4 +48,16 @@ Exemplo da resposta do comando ls:
 |--- |--- |--- |--- |--- |--- |--- |
 | a53547da805e | postgres:13.4-alpine| "docker-entrypoint.s…"| 37 minutes ago | Up 4 minutes | 0.0.0.0:5432->5432/tcp  3 | ensor_postgres_1 |
 
+
+## Pasta Domain
+
+Antes de iniciar a divisão de pastas vamos falar sobre a diferença entre entidade e objeto de valor.
+
+Entidade: toda entidade possui um identificador, além disso uma entidade possui o seu tempo de vida dentro do dominio.
+
+Objeto de valor - VO: Não possui nenhum tipo de vículo com ciclo de vida do dominio ou aplicação. A imutabilidade é uma caracterítica do VO.
+
+Imutabilidade: Se o objeto necessita mudar seu estado e seus valores, ele não é imutavél, logo também não é um VO, pois VO não permitem que seus valores sejam alterados para a mesma instância.
+
+Como vimos na herança do nosso banco não modelamos o banco seguindo fielmente o conceito de entidade e VO. Neste [artigo](https://jrobertoaraujo.medium.com/entidades-vs-objeto-de-valor-a257ad41cbd3#:~:text=Toda%20entidade%2C%20possui%20acontecimentos%20que,vida%20do%20dominio%20ou%20aplica%C3%A7%C3%A3o.) você consegue encontrar uma explicação simples e sucinta do porque ferimos o conceito. Como esse projeto é para estudo mudanças na migration foram realizadas, mas em um ambiente de produção essa mudança seria de grande impacto e deve ser analisada com cuidado
 
