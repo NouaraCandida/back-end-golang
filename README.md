@@ -50,12 +50,10 @@ Exemplo da resposta do comando ls:
 
 
 ### Conectando no banco postgres
-Lembrando que o objetivo deste projeto é migrar um projeto .NET Core para golang. 
+Lembrando que o objetivo deste projeto é migrar um projeto .NET Core para golang. Então vamos a uma diferença muito importante: a conexão no banco de dados.
 
-Então vamos uma diferença muito importante: a conexão no banco de dados.
-
-O caminho relativo da conexão é db/postgres/dbpostgres.go
-Nesta implementação um novo conceito foi apresentado, no golang precisamos importar nossa bibliotecas, e ao construir a conexão com banco de dados precisamos importar de forma implicita a lib do postgres. Ta ai um segredinho, basta colocar um _ na frente da importação.
+O caminho relativo da implementaçãp da conexão é db/postgres/dbpostgres.go
+Nesta implementação aprendemos um novo conceito, no golang precisamos importar nossa bibliotecas, e ao construir a conexão com banco de dados precisamos importar de forma implicita a lib do postgres. Ta ai um segredinho, basta colocar um _ na frente da importação.
 
 ``` 
 import (
