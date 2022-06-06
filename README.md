@@ -49,6 +49,27 @@ Exemplo da resposta do comando ls:
 | a53547da805e | postgres:13.4-alpine| "docker-entrypoint.s…"| 37 minutes ago | Up 4 minutes | 0.0.0.0:5432->5432/tcp  3 | ensor_postgres_1 |
 
 
+### Conectando no banco postgres
+Lembrando que o objetivo deste projeto é migrar um projeto .NET Core para golang. 
+
+Então vamos uma diferença muito importante: a conexão no banco de dados.
+
+O caminho relativo da conexão é db/postgres/dbpostgres.go
+Nesta implementação um novo conceito foi apresentado, no golang precisamos importar nossa bibliotecas, e ao construir a conexão com banco de dados precisamos importar de forma implicita a lib do postgres. Ta ai um segredinho, basta colocar um _ na frente da importação.
+
+``` 
+import (
+	"database/sql"
+	"fmt"
+	"log"
+	config "sensor/pkg/config/sensor"
+
+	//importando de maneira implicita, quem utiliza é o pacote database/sql
+	_ "github.com/lib/pq"
+)
+```
+
+
 ## Pasta Domain
 
 Antes de iniciar a divisão de pastas vamos falar sobre a diferença entre entidade e objeto de valor.
