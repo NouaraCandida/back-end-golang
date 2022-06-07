@@ -69,7 +69,7 @@ import (
 
 
 ## Repositorio
- "O padrão  Repository faz a mediação entre o domínio e as camadas de mapeamento de dados, agindo como uma coleção de objetos de domínio em memória.....Conceitualmente, um repositório encapsula o conjunto de objetos persistidos em um armazenamento de dados e as operações realizadas sobre eles, fornecendo uma visão mais orientada a objetos da camada de persistência.....e também da suporte ao objetivo de alcançar uma separação limpa e uma forma de dependência entre o domínio e as camadas de mapeamento de dados."
+ Palavras de Martin Fowler"O padrão  Repository faz a mediação entre o domínio e as camadas de mapeamento de dados, agindo como uma coleção de objetos de domínio em memória.....Conceitualmente, um repositório encapsula o conjunto de objetos persistidos em um armazenamento de dados e as operações realizadas sobre eles, fornecendo uma visão mais orientada a objetos da camada de persistência.....e também da suporte ao objetivo de alcançar uma separação limpa e uma forma de dependência entre o domínio e as camadas de mapeamento de dados."
 
  Para nossa aplicação vamos utilizar esse padrão. A pasta repositorio contém toda a implementação. Dentro da pasta model declaramos a interface que representa o contrato de repositorio de cada entidade. Essa implementação permite realizar o isolamento da camada de dados e possibilita a troca do banco de dados sem grandes impactos. Vamos evoluir essa implementação com o projeto mas já temos um ponto de partida.
 ``` 
