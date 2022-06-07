@@ -1,23 +1,19 @@
 BEGIN;
 
-	CREATE TABLE sensores(
-		id				UUID	NOT NULL,
-		nome			CITEXT	NOT NULL,
-		nome_regiao   	CITEXT    NOT NULL,
-		nome_pais 		CITEXT NOT NULL
-		created_at 		TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-		updated_at 		TIMESTAMPTZ,
+CREATE TABLE sensores (
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    nome citext NOT NULL,
+    nome_regiao VARCHAR NOT NULL,
+    nome_pais VARCHAR NOT NULL,
+    created_at 		timestamptz NOT NULL DEFAULT NOW(),
+	updated_at 		timestamptz,
+    PRIMARY KEY (id)
+);
 
-		CONSTRAINT		sensores_pk
-		PRIMARY KEY		(id),
-		CONSTRAINT		sensores_nome_ak1
-		UNIQUE			(nome, id_localidade),
-		CONSTRAINT		sensor_localidade_fk1
-		FOREIGN KEY		(id_localidade)
-		REFERENCES	     localidades
-	);
-
-
+   CREATE TRIGGER "tr_sensores_updated_at" 
+   BEFORE UPDATE ON "sensores"
+   FOR EACH ROW 
+   EXECUTE FUNCTION trigger_updated_at_timestamp();
 
 
 COMMIT;

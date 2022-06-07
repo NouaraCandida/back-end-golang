@@ -68,15 +68,13 @@ import (
 ```
 
 
-## Pasta Domain
+## Repositorio
+ "O padrão  Repository faz a mediação entre o domínio e as camadas de mapeamento de dados, agindo como uma coleção de objetos de domínio em memória.....Conceitualmente, um repositório encapsula o conjunto de objetos persistidos em um armazenamento de dados e as operações realizadas sobre eles, fornecendo uma visão mais orientada a objetos da camada de persistência.....e também da suporte ao objetivo de alcançar uma separação limpa e uma forma de dependência entre o domínio e as camadas de mapeamento de dados."
 
-Antes de iniciar a divisão de pastas vamos falar sobre a diferença entre entidade e objeto de valor.
-
-Entidade: toda entidade possui um identificador, além disso uma entidade possui o seu tempo de vida dentro do dominio.
-
-Objeto de valor - VO: Não possui nenhum tipo de vículo com ciclo de vida do dominio ou aplicação. A imutabilidade é uma caracterítica do VO.
-
-Imutabilidade: Se o objeto necessita mudar seu estado e seus valores, ele não é imutavél, logo também não é um VO, pois VO não permitem que seus valores sejam alterados para a mesma instância.
-
-Como vimos na herança do nosso banco não modelamos o banco seguindo fielmente o conceito de entidade e VO. Neste [artigo](https://jrobertoaraujo.medium.com/entidades-vs-objeto-de-valor-a257ad41cbd3#:~:text=Toda%20entidade%2C%20possui%20acontecimentos%20que,vida%20do%20dominio%20ou%20aplica%C3%A7%C3%A3o.) você consegue encontrar uma explicação simples e sucinta do porque ferimos o conceito. Como esse projeto é para estudo mudanças na migration foram realizadas, mas em um ambiente de produção essa mudança seria de grande impacto e deve ser analisada com cuidado
-
+ Para nossa aplicação vamos utilizar esse padrão. A pasta repositorio contém toda a implementação. Dentro da pasta model declaramos a interface que representa o contrato de repositorio de cada entidade. Essa implementação permite realizar o isolamento da camada de dados e possibilita a troca do banco de dados sem grandes impactos. Vamos evoluir essa implementação com o projeto mas já temos um ponto de partida.
+``` 
+type SensorRepositorio interface {
+	Get(id uuid.UUID) (Sensor, error)
+	Create(sensor Sensor) (Sensor, error)
+}
+```

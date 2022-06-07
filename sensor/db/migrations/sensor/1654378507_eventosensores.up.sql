@@ -1,7 +1,7 @@
 BEGIN;
 
 	CREATE TABLE eventos_sensores(
-		id					UUID			NOT NULL,
+		id					uuid NOT NULL DEFAULT uuid_generate_v4(),
 		id_sensor			UUID			NOT NULL,
 		valor				CITEXT,
 		created_at 							TIMESTAMPTZ NOT NULL DEFAULT NOW(),
