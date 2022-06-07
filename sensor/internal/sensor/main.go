@@ -14,6 +14,8 @@ import (
 
 func main() {
 
+    
+	// A mudança de repositorio aconteceria somente até repositorio, pois NewSensorService tem como parÂmetro uma interface
 	db, err := db.Conectar()
 	if err != nil {
 		log.Fatal(err)
