@@ -1,5 +1,10 @@
 # Sensor
 
+##Objetivo
+Esse projeto possui o objetivo de estudo da linguagem golang. Neste projeto está sendo feito uma rescrita de um projeto .NET Core. 
+
+Github NetCore: https://github.com/NouaraCandida/net-backend-ddd
+
 ## Criação do projeto
 Para gerenciar os pacotes com mais flexibilidade o golang 1.13> possibilita criar  você criará seu próprio módulo Go público e adicionará um pacote ao seu novo módulo.Para informações detalhadas acesso o [link](https://www.digitalocean.com/community/tutorials/how-to-use-go-modules). Para este projeto nosso módulo chamará sensor.
 
@@ -74,7 +79,7 @@ import (
  Para nossa aplicação vamos utilizar esse padrão. A pasta repositorio contém toda a implementação. Dentro da pasta model declaramos a interface que representa o contrato de repositorio de cada entidade. Essa implementação permite realizar o isolamento da camada de dados e possibilita a troca do banco de dados sem grandes impactos. Vamos evoluir essa implementação com o projeto mas já temos um ponto de partida.
 ``` 
 type SensorRepositorio interface {
-	Get(id uuid.UUID) (Sensor, error)
-	Create(sensor Sensor) (Sensor, error)
+	Get(ctx context.Context, id uuid.UUID) (Sensor, error)
+	Create(ctx context.Context, sensor Sensor) (Sensor, error)
 }
 ```
