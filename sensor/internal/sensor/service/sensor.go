@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"sensor/internal/sensor/repositorio/model"
 
 	"github.com/google/uuid"
@@ -16,8 +17,8 @@ func NewSensorService(repositorio model.SensorRepositorio) *SensorService {
 	return &SensorService{Repositorio: repositorio}
 }
 
-func (s *SensorService) FindById(id uuid.UUID) (model.Sensor, error) {
-	sensor, err := s.Repositorio.Get(id)
+func (s *SensorService) FindById(ctx context.Context,id uuid.UUID) (model.Sensor, error) {
+	sensor, err := s.Repositorio.Get(ctx, id)
 	if err != nil {
 		return model.Sensor{}, err
 	}
@@ -25,8 +26,8 @@ func (s *SensorService) FindById(id uuid.UUID) (model.Sensor, error) {
 
 }
 
-func (s *SensorService) Create(sensor model.Sensor) (model.Sensor, error) {
-	sensor, err := s.Repositorio.Create(sensor)
+func (s *SensorService) Create(ctx context.Context, sensor model.Sensor) (model.Sensor, error) {
+	sensor, err := s.Repositorio.Create(ctx, sensor)
 	if err != nil {
 		return model.Sensor{}, err
 	}

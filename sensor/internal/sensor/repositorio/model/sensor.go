@@ -1,10 +1,14 @@
 package model
 
-import "github.com/google/uuid"
+import (
+	"context"
+
+	"github.com/google/uuid"
+)
 
 type SensorRepositorio interface {
-	Get(id uuid.UUID) (Sensor, error)
-	Create(sensor Sensor) (Sensor, error)
+	Get(ctx context.Context, id uuid.UUID) (Sensor, error)
+	Create(ctx context.Context, sensor Sensor) (Sensor, error)
 }
 
 type Sensor struct {

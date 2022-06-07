@@ -56,7 +56,7 @@ func Test_sensorRepo_Create(t *testing.T) {
 				tt.beforeTest(mockSQL)
 			}
 
-			got, err := u.Create(tt.input)
+			got, err := u.Create(tt.ctx,tt.input)
 			if (err != nil) {
 				t.Errorf("userRepo.Create() error = %v, wantErr %v", err, tt.wantErr)
 				return

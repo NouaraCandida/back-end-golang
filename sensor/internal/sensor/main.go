@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	db "sensor/db/postgres"
@@ -23,14 +24,14 @@ func main() {
 
 	ids := "4fc8b12a-2586-4639-b7f0-4806ab681eba"
 	id, err := uuid.Parse(ids)
-	sensor, err := s.FindById(id)
+	sensor, err := s.FindById(context.Background(),id)
 
 	screate := model.Sensor{
 		Nome:       "Sensor 2",
 		Nomeregiao: "Norte",
 		Nomepais:   "Brasil",
 	}
-	sss, err := s.Create(screate)
+	sss, err := s.Create(context.Background(), screate)
 	if err != nil {
 		log.Fatal(err)
 	}
