@@ -3,7 +3,6 @@ package model_test
 import (
 	"sensor/internal/sensor/repositorio/model"
 	"testing"
-	//"sensor/pkg/domain/sensor/v1/modelo"
 )
 
 func TestSensor_NewSensor(t *testing.T) {
