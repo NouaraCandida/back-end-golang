@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"sensor/internal/sensor/repositorio/model"
+
 	"github.com/google/uuid"
-	
 )
 
 type SensorRepositorioPostgres struct {
@@ -18,23 +18,20 @@ func NewRepositorioPostgres(db *sql.DB) *SensorRepositorioPostgres {
 
 func (s *SensorRepositorioPostgres) Get(ctx context.Context, id uuid.UUID) (model.Sensor, error) {
 	var sensor model.Sensor
-	query := "select id, nome from sensores where id=$1"
-	
-	if err  :=  s.db.QueryRowContext(ctx, query,id).
-		Scan(&sensor.ID, &sensor.Nome); err != nil{
-			return model.Sensor{}, err
-		}
+
+	if err := s.db.QueryRowContext(ctx, qSensor_Get, id).
+		Scan(&sensor.ID, &sensor.Nome); err != nil {
+		return model.Sensor{}, err
+	}
 
 	return sensor, nil
 
 }
 
 func (s *SensorRepositorioPostgres) Create(ctx context.Context, sensor model.Sensor) (model.Sensor, error) {
-	query := "insert into sensores (nome, nome_regiao, nome_pais) values ($1, $2, $3) returning id"
-	
-	 err  :=  s.db.QueryRowContext(ctx, query,sensor.Nome, sensor.Nomepais, sensor.Nomeregiao).
-		Scan(&sensor.ID);
-	 if err != nil{
+	err := s.db.QueryRowContext(ctx, qSensor_Create, sensor.Nome, sensor.Nomepais, sensor.Nomeregiao).
+		Scan(&sensor.ID)
+	if err != nil {
 		return model.Sensor{}, err
 	}
 

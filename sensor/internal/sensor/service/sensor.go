@@ -10,15 +10,19 @@ import (
 //DI IC - não dizemos qual repo e sim uma interface, dando abertura para mudanças
 //de banco de dados sem grandes refatoração
 type SensorService struct {
-	Repositorio model.SensorRepositorio
+	Repositorio   model.SensorRepositorio
 }
 
 func NewSensorService(repositorio model.SensorRepositorio) *SensorService {
 	return &SensorService{Repositorio: repositorio}
 }
 
-func (s *SensorService) FindById(ctx context.Context,id uuid.UUID) (model.Sensor, error) {
-	sensor, err := s.Repositorio.Get(ctx, id)
+func (s *SensorService) Get(ctx context.Context, id string) (model.Sensor, error) {
+	iduui, err := uuid.Parse(id)
+	if err != nil {
+		return model.Sensor{}, err
+	}
+	sensor, err := s.Repositorio.Get(ctx, iduui)
 	if err != nil {
 		return model.Sensor{}, err
 	}
@@ -34,3 +38,5 @@ func (s *SensorService) Create(ctx context.Context, sensor model.Sensor) (model.
 	return sensor, nil
 
 }
+
+

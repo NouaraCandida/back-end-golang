@@ -12,18 +12,18 @@ type SensorRepositorio interface {
 }
 
 type Sensor struct {
-	ID         uuid.UUID `json:"id"`
-	Nome       string    `json:"nome"`
-	Nomeregiao string    `json:"nomeregiao"`
-	Nomepais   string    `json:"nomepais"`
+	ID         uuid.UUID  `json:"id"`
+	Nome       string     `json:"nome"`
+	Nomeregiao EnumRegiao `json:"nomeregiao"`
+	Nomepais   EnumPais   `json:"nomepais"`
 }
 
-func NewSensor(nome string, pais string, regiao string) (Sensor, error) {
+func NewSensor(nome string, pais EnumPais, regiao EnumRegiao) (Sensor, error) {
 	if nome == "" {
 		return Sensor{}, ErrInvalidNomeSensor
 	}
 
-	if pais == "" || regiao == "" {
+	if pais == 0 || regiao == 0 {
 		return Sensor{}, ErrInvalidLocSensor
 	}
 

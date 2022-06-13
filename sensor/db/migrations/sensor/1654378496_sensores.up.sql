@@ -3,8 +3,8 @@ BEGIN;
 CREATE TABLE sensores (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
     nome citext NOT NULL,
-    nome_regiao VARCHAR NOT NULL,
-    nome_pais VARCHAR NOT NULL,
+    nome_regiao int NOT NULL,
+    nome_pais int NOT NULL,
     created_at 		timestamptz NOT NULL DEFAULT NOW(),
 	updated_at 		timestamptz,
     PRIMARY KEY (id)

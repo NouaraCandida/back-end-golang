@@ -10,8 +10,8 @@ func TestSensor_NewSensor(t *testing.T) {
 	type testCase struct {
 		test        string
 		nomeSensor  string
-		pais        string
-		regiao      string
+		pais        model.EnumPais
+		regiao      model.EnumRegiao
 		expectedErr error
 	}
 
@@ -19,30 +19,30 @@ func TestSensor_NewSensor(t *testing.T) {
 		{
 			test:        "Validação de nome do sensor vazio",
 			nomeSensor:  "",
-			pais:        "Brasil",
-			regiao:      "Sul",
+			pais:        model.EnumBrasil,
+			regiao:      model.EnumCentroOeste,
 			expectedErr: model.ErrInvalidNomeSensor,
 		},
 
 		{
 			test:        "Validação pais vazio",
 			nomeSensor:  "Sensor 1",
-			pais:        "",
-			regiao:      "Sul",
+			pais:        model.EnumPaisIndefinidos,
+			regiao:      model.EnumCentroOeste,
 			expectedErr: model.ErrInvalidLocSensor,
 		},
 		{
 			test:        "Validação regiao vazio",
 			nomeSensor:  "Sensor 1",
-			pais:        "Brasil",
-			regiao:      "",
+			pais:        model.EnumBrasil,
+			regiao:      model.EnumRegiaoIndefinido,
 			expectedErr: model.ErrInvalidLocSensor,
 		},
 		{
 			test:        "Valida objeto ",
 			nomeSensor:  "Sensor 1",
-			pais:        "Brasil",
-			regiao:      "Sul",
+			pais:        model.EnumBrasil,
+			regiao:      model.EnumCentroOeste,
 			expectedErr: nil,
 		},
 	}
