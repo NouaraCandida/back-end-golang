@@ -13,12 +13,12 @@
     },
 
         {
-            "name": "Run Evento API",
+            "name": "Run Sensor API",
             "type": "go",
             "request": "launch",
             "mode": "debug",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/internal/sensor/main.go",
+            "program": "${workspaceFolder}/cmd/sensor/main.go",
         },
         
 
