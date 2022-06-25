@@ -8,7 +8,9 @@ import (
 
 	"sensor/internal/sensor/repository/model"
 	repo "sensor/internal/sensor/repository/postgres/sensor"
+	"sensor/pkg/config"
 	dbpostgres "sensor/pkg/db/postgres"
+	"sensor/pkg/log"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/google/uuid"
@@ -24,6 +26,10 @@ func Test_sensorRepo_Create(t *testing.T) {
 		want       uuid.UUID
 		wantErr    bool
 	}
+
+	log := log.NewLog(config.LoadConfigLog())
+	configDatabase := config.LoadConfigDatabase()
+	postgres := dbpostgres.NewPostgres(configDatabase, log)
 
 	sensor_input := &model.Sensor{Nome: "Sensor Nouara 2 ", Nomeregiao: model.EnumCentroOeste, Nomepais: model.EnumBrasil}
 	tests := []testCase{
@@ -50,8 +56,8 @@ func Test_sensorRepo_Create(t *testing.T) {
 			mockDB, mockSQL, _ := sqlmock.New()
 			defer mockDB.Close()
 
-			db, _ := dbpostgres.PostgresConnection()
-			u := repo.NewRepositoryPostgres(db)
+			db, _ := postgres.PostgresConnection()
+			u := repo.NewRepositoryPostgres(db, log)
 
 			if tt.beforeTest != nil {
 				tt.beforeTest(mockSQL)
@@ -82,6 +88,9 @@ func Test_sensorRepo_Get(t *testing.T) {
 		wantErr    bool
 	}
 	id_test, _ := uuid.Parse("3a0944dd-2498-4fd3-93b2-30cc224956c2")
+	log := log.NewLog(config.LoadConfigLog())
+	configDatabase := config.LoadConfigDatabase()
+	postgres := dbpostgres.NewPostgres(configDatabase, log)
 
 	tests := []testCase{
 		{
@@ -106,8 +115,8 @@ func Test_sensorRepo_Get(t *testing.T) {
 			mockDB, mockSQL, _ := sqlmock.New()
 			defer mockDB.Close()
 
-			db, _ := dbpostgres.PostgresConnection()
-			u := repo.NewRepositoryPostgres(db)
+			db, _ := postgres.PostgresConnection()
+			u := repo.NewRepositoryPostgres(db, log)
 
 			if tt.beforeTest != nil {
 				tt.beforeTest(mockSQL)

@@ -5,7 +5,10 @@ import (
 	"sensor/internal/sensor/repository/model"
 	"time"
 
+	"sensor/pkg/responses"
+
 	"github.com/gorilla/mux"
+	"go.uber.org/zap"
 )
 
 type Handler struct {
@@ -13,6 +16,8 @@ type Handler struct {
 	EventService       model.EventService
 	SensorService      model.SensorService
 	MaxBodyBytes       int64
+	Logger             *zap.Logger
+	Responses          *responses.Responses
 }
 
 type HandlerConfig struct {
@@ -22,6 +27,8 @@ type HandlerConfig struct {
 	SensorService      model.SensorService
 	MaxBodyBytes       int64
 	TimeoutDuration    time.Duration
+	Logger             *zap.Logger
+	Responses          *responses.Responses
 }
 
 type Route struct {
@@ -37,6 +44,8 @@ func NewHandler(config *HandlerConfig) {
 		EventService:       config.EventService,
 		SensorService:      config.SensorService,
 		MaxBodyBytes:       config.MaxBodyBytes,
+		Logger:             config.Logger,
+		Responses:          config.Responses,
 	}
 
 	var routeSensor = []Route{

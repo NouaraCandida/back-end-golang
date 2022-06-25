@@ -6,14 +6,16 @@ import (
 	"sensor/internal/sensor/repository/model"
 
 	"github.com/google/uuid"
+	"go.uber.org/zap"
 )
 
 type SensorRepositoryPostgres struct {
-	db *sql.DB
+	db     *sql.DB
+	logger *zap.Logger
 }
 
-func NewRepositoryPostgres(db *sql.DB) *SensorRepositoryPostgres {
-	return &SensorRepositoryPostgres{db: db}
+func NewRepositoryPostgres(db *sql.DB, log *zap.Logger) *SensorRepositoryPostgres {
+	return &SensorRepositoryPostgres{db, log}
 }
 
 func (s *SensorRepositoryPostgres) Get(ctx context.Context, id uuid.UUID) (*model.Sensor, error) {

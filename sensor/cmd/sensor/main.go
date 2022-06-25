@@ -2,25 +2,33 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	i "sensor/cmd/sensor/injection"
+	"sensor/pkg/config"
 	"sensor/pkg/db"
+	"sensor/pkg/log"
 )
 
 func main() {
-	//Initialize data sources
-	ds, err := db.InitializeDataSources()
+	/*
+	 * PKGS
+	 */
+	log := log.NewLog(config.LoadConfigLog())
+
+	/*
+	 * Initialize data sources
+	 */
+	ds, err := db.InitializeDataSources(log, config.LoadConfigDatabase(), config.LoadConfigMigrate())
 	if err != nil {
-		log.Fatalf("Unable to initialize data sources: %v\n", err)
+		log.Sugar().DPanic("Unable to initialize data sources: %v\n", err)
 	}
 
-	router, err := i.Injection(ds)
+	router, err := i.Injection(ds, log)
 	if err != nil {
-		log.Fatalf("Unable to initialize routes: %v\n", err)
+		log.Sugar().DPanic("Unable to initialize routes: %v\n", err)
 	}
 
-	fmt.Println("Rodando API")
-	log.Fatal(http.ListenAndServe(":5001", router))
+	fmt.Println("Running API")
+	log.Sugar().DPanic(http.ListenAndServe(":5001", router))
 
 }

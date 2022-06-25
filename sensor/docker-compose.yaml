@@ -4,7 +4,7 @@ services:
     image: postgres:13.4-alpine
     volumes:
       - sensor-postgres-volume:/var/lib/postgresql/data
-      - ./db/postgres:/docker-entrypoint-initdb.d
+      - ./infra/db/postgres:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     environment:

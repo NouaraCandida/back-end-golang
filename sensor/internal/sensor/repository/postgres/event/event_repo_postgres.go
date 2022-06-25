@@ -6,14 +6,16 @@ import (
 	"sensor/internal/sensor/repository/model"
 
 	"github.com/google/uuid"
+	"go.uber.org/zap"
 )
 
 type EventRepositoryPostgres struct {
-	db *sql.DB
+	db     *sql.DB
+	logger *zap.Logger
 }
 
-func NewRepositoryPostgres(db *sql.DB) *EventRepositoryPostgres {
-	return &EventRepositoryPostgres{db: db}
+func NewRepositoryPostgres(db *sql.DB, log *zap.Logger) *EventRepositoryPostgres {
+	return &EventRepositoryPostgres{db, log}
 }
 
 func (s *EventRepositoryPostgres) Get(ctx context.Context, id uuid.UUID) (*model.Event, error) {

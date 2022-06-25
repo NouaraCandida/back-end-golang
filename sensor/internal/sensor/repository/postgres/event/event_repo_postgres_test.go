@@ -7,7 +7,9 @@ import (
 	"testing"
 
 	"sensor/internal/sensor/repository/model"
+	"sensor/pkg/config"
 	dbpostgres "sensor/pkg/db/postgres"
+	"sensor/pkg/log"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/google/uuid"
@@ -24,6 +26,9 @@ func Test_eventoRepo_Create(t *testing.T) {
 	}
 
 	idSensor, _ := uuid.Parse("3a0944dd-2498-4fd3-93b2-30cc224956c2")
+	log := log.NewLog(config.LoadConfigLog())
+	configDatabase := config.LoadConfigDatabase()
+	postgres := dbpostgres.NewPostgres(configDatabase, log)
 
 	tests := []testCase{
 		{
@@ -48,8 +53,8 @@ func Test_eventoRepo_Create(t *testing.T) {
 			mockDB, mockSQL, _ := sqlmock.New()
 			defer mockDB.Close()
 
-			db, _ := dbpostgres.PostgresConnection()
-			u := NewRepositoryPostgres(db)
+			db, _ := postgres.PostgresConnection()
+			u := NewRepositoryPostgres(db, log)
 
 			if tt.beforeTest != nil {
 				tt.beforeTest(mockSQL)
@@ -81,6 +86,9 @@ func Test_eventoRepo_Get(t *testing.T) {
 	id_test, _ := uuid.Parse("ec943ce3-0091-4625-87e0-b2a7b4c4bd77")
 	id_sensor_test, _ := uuid.Parse("3a0944dd-2498-4fd3-93b2-30cc224956c2")
 	valor_test := "20A"
+	log := log.NewLog(config.LoadConfigLog())
+	configDatabase := config.LoadConfigDatabase()
+	postgres := dbpostgres.NewPostgres(configDatabase, log)
 
 	tests := []testCase{
 		{
@@ -103,8 +111,8 @@ func Test_eventoRepo_Get(t *testing.T) {
 			mockDB, mockSQL, _ := sqlmock.New()
 			defer mockDB.Close()
 
-			db, _ := dbpostgres.PostgresConnection()
-			u := NewRepositoryPostgres(db)
+			db, _ := postgres.PostgresConnection()
+			u := NewRepositoryPostgres(db, log)
 
 			if tt.beforeTest != nil {
 				tt.beforeTest(mockSQL)
@@ -139,6 +147,9 @@ func Test_eventoRepo_GetEventosToIDSensor(t *testing.T) {
 		beforeTest func(sqlmock.Sqlmock)
 	}
 	id_sensor_test, _ := uuid.Parse("3a0944dd-2498-4fd3-93b2-30cc224956c2")
+	log := log.NewLog(config.LoadConfigLog())
+	configDatabase := config.LoadConfigDatabase()
+	postgres := dbpostgres.NewPostgres(configDatabase, log)
 
 	tests := []testCase{
 		{
@@ -159,8 +170,8 @@ func Test_eventoRepo_GetEventosToIDSensor(t *testing.T) {
 			mockDB, mockSQL, _ := sqlmock.New()
 			defer mockDB.Close()
 
-			db, _ := dbpostgres.PostgresConnection()
-			u := NewRepositoryPostgres(db)
+			db, _ := postgres.PostgresConnection()
+			u := NewRepositoryPostgres(db, log)
 
 			if tt.beforeTest != nil {
 				tt.beforeTest(mockSQL)
