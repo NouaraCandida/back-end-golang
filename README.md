@@ -1,6 +1,6 @@
 # Sensor
 
-##Objetivo
+## Objetivo
 Esse projeto possui o objetivo de estudo da linguagem golang. Neste projeto está sendo feito uma rescrita de um projeto .NET Core. 
 
 Github NetCore: https://github.com/NouaraCandida/net-backend-ddd
